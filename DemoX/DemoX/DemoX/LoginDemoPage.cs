@@ -10,12 +10,8 @@ namespace DemoX
 {
     public class LoginDemoPage : ContentPage
     {
-        private LoginViewModel _viewModel;
         public LoginDemoPage()
         {
-            _viewModel = new LoginViewModel();
-            BindingContext = _viewModel;
-
             Title = "Xamarin Demo";
             Padding = new Thickness(left: 10, top: 0, right: 10, bottom: 0);
             Content = Stack();
@@ -37,20 +33,18 @@ namespace DemoX
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
 
-            var usernameEntry = new RoundCornerEntry
+            var usernameEntry = new Entry
             {
                 Placeholder = "Username",
                 HorizontalOptions = LayoutOptions.Fill,
             };
-            usernameEntry.SetBinding(Entry.TextProperty, LoginViewModel.UsernameProperty, BindingMode.TwoWay);
 
-            var passwordEntry = new RoundCornerEntry
+            var passwordEntry = new Entry
             {
                 Placeholder = "Password",
                 IsPassword = true,
                 HorizontalOptions = LayoutOptions.Fill,
             };
-            passwordEntry.SetBinding(Entry.TextProperty, LoginViewModel.PasswordProperty);
 
             var loginButton = new Button
             {
@@ -67,12 +61,7 @@ namespace DemoX
 
             loginButton.Clicked += (sender, args) =>
             {
-                if (_viewModel.ValidateCredentials())
-                {
-                    DisplayAlert("Credential Validated", "Credentials Validated", "OK");
-                    return;
-                }
-                DisplayAlert("Credential Not Validated", "Credentials Not Validated", "OK");
+                DisplayAlert("Button Clicked", "Button Clicked", "OK");
             };
 
 
