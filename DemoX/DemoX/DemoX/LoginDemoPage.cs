@@ -10,20 +10,17 @@ namespace DemoX
 {
     public class LoginDemoPage : ContentPage
     {
-        /// <summary>
-        /// The page constructor
-        /// </summary>
+        private LoginViewModel _viewModel;
         public LoginDemoPage()
         {
+            _viewModel = new LoginViewModel();
+            BindingContext = _viewModel;
+
             Title = "Xamarin Demo";
             Padding = new Thickness(left: 10, top: 0, right: 10, bottom: 0);
             Content = Stack();
         }
 
-        /// <summary>
-        /// Builds the main layout
-        /// </summary>
-        /// <returns>The main stacklayout</returns>
         private StackLayout Stack()
         {
             var layout = new StackLayout
@@ -37,20 +34,23 @@ namespace DemoX
                 Text = "Login",
                 HorizontalOptions = LayoutOptions.Center,
                 TextColor = Color.Black,
-                FontSize = Device.GetNamedSize(NamedSize.Large, typeof (Label))
+                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
 
-            var usernameEntry = new Entry
+            var usernameEntry = new RoundCornerEntry
             {
                 Placeholder = "Username",
                 HorizontalOptions = LayoutOptions.Fill,
             };
+            usernameEntry.SetBinding(Entry.TextProperty, LoginViewModel.UsernameProperty, BindingMode.TwoWay);
 
-            var passwordEntry = new Entry
+            var passwordEntry = new RoundCornerEntry
             {
                 Placeholder = "Password",
+                IsPassword = true,
                 HorizontalOptions = LayoutOptions.Fill,
             };
+            passwordEntry.SetBinding(Entry.TextProperty, LoginViewModel.PasswordProperty);
 
             var loginButton = new Button
             {
@@ -65,9 +65,16 @@ namespace DemoX
                 loginButton.BackgroundColor = Color.Black;
             });
 
-            loginButton.Clicked += (sender, args) => {
-                DisplayAlert("Button clicked", "You clicked the button", "OK");
+            loginButton.Clicked += (sender, args) =>
+            {
+                if (_viewModel.ValidateCredentials())
+                {
+                    DisplayAlert("Credential Validated", "Credentials Validated", "OK");
+                    return;
+                }
+                DisplayAlert("Credential Not Validated", "Credentials Not Validated", "OK");
             };
+
 
             layout.Children.Add(label);
             layout.Children.Add(usernameEntry);
