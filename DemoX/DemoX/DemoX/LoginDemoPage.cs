@@ -37,14 +37,14 @@ namespace DemoX
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
             };
 
-            var usernameEntry = new RoundCornerEntry
+            var usernameEntry = new Entry
             {
                 Placeholder = "Username",
                 HorizontalOptions = LayoutOptions.Fill,
             };
             usernameEntry.SetBinding(Entry.TextProperty, LoginViewModel.UsernameProperty, BindingMode.TwoWay);
 
-            var passwordEntry = new RoundCornerEntry
+            var passwordEntry = new Entry
             {
                 Placeholder = "Password",
                 IsPassword = true,

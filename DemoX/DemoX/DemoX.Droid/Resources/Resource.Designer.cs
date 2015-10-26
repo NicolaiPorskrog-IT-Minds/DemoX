@@ -47,9 +47,6 @@ namespace DemoX.Droid
 			// aapt resource value: 0x7f020000
 			public const int icon = 2130837504;
 			
-			// aapt resource value: 0x7f020001
-			public const int RoundCornerEntry = 2130837505;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
