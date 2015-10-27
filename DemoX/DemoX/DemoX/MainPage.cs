@@ -12,11 +12,15 @@ namespace DemoX
     {
         public MainPage()
         {
+            var button = new Button { Text = "Back" };
+            button.Clicked += (sender, args) =>
+            {
+                Navigation.PopAsync();
+            };
+
             Content = new StackLayout
             {
-                Children = {
-					new Label { Text = "Hello ContentPage" }
-				}
+                Children = { button }
             };
         }
     }
