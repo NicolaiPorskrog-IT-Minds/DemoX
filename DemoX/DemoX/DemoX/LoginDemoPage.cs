@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Text;
-
+using System.Xml.Serialization;
 using Xamarin.Forms;
 
 namespace DemoX
@@ -75,11 +76,46 @@ namespace DemoX
                 DisplayAlert("Credential Not Validated", "Credentials Not Validated", "OK");
             };
 
+            var navigationButton = new Button
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                Text = "Push Navigation"
+            };
+
+            Device.OnPlatform(() =>
+            {
+                navigationButton.TextColor = Color.White;
+                navigationButton.BackgroundColor = Color.Black;
+            });
+
+            navigationButton.Clicked += (sender, args) =>
+            {
+                Navigation.PushAsync(new MainPage());
+            };
+
+            var navigationModalButton = new Button
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                Text = "Push Modal"
+            };
+
+            Device.OnPlatform(() =>
+            {
+                navigationModalButton.TextColor = Color.White;
+                navigationModalButton.BackgroundColor = Color.Black;
+            });
+
+            navigationModalButton.Clicked += (sender, args) =>
+            {
+                Navigation.PushModalAsync(new MainModalPage());
+            };
 
             layout.Children.Add(label);
             layout.Children.Add(usernameEntry);
             layout.Children.Add(passwordEntry);
             layout.Children.Add(loginButton);
+            layout.Children.Add(navigationModalButton);
+            layout.Children.Add(navigationButton);
 
             return layout;
         }

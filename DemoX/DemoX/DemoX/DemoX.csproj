@@ -37,6 +37,8 @@
     <Compile Include="App.cs" />
     <Compile Include="LoginDemoPage.cs" />
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="MainModalPage.cs" />
+    <Compile Include="MainPage.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
